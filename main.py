@@ -4,25 +4,25 @@ import ccxt
 import logging
 import matplotlib.pyplot as plt
 
-
 logger = logging.getLogger(__name__)
 
 SYMBOL = "QRDO-USDT"
+EXCHANGES = ["kucoin", "gateio", "mexc", "bitmart", "hitbtc", "bitfinex", "bitget"]
+
 
 symbol_variances = [SYMBOL, SYMBOL.replace("-", "_"), SYMBOL.replace("-", "")]
-exchanges = [ccxt.kucoin, ccxt.gateio, ccxt.mexc, ccxt.bitmart, ccxt.hitbtc, ccxt.bitfinex, ccxt.bitget]
 
 data = {}
-for exchange_cls in exchanges:
-    exchange = exchange_cls()
+for exchange_id in EXCHANGES:
+    exchange = getattr(ccxt, exchange_id)()
     for variance in symbol_variances:
         try:
-            data[exchange_cls.__name__] = exchange.fetch_ohlcv(variance, timeframe="1m", limit=100)
+            data[exchange_id] = exchange.fetch_ohlcv(variance, timeframe="1m", limit=100)
             break
         except Exception as e:
             pass
     else:
-        logger.error("Can't fetch %s ohlcv for %s", SYMBOL, exchange_cls.__name__)
+        logger.error("Can't fetch %s ohlcv for %s", SYMBOL, exchange_id)
 
 
 start_point = max(o[0][0] for o in data.values())
