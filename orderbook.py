@@ -23,7 +23,7 @@ def calculate_arbitrage(orderbooks):
     bids = reduce(lambda l, r: merge_orderbooks(l, r, True), map(lambda book: book["bids"], orderbooks))
     for ask_price, ask_amount in asks:
         for bid in bids:
-            if ask_price > bid[0] or ask_amount == 0:
+            if ask_price > bid[0] or ask_amount == 0 or bid[1] == 0:
                 break
             delta = min(ask_amount, bid[1])
             profits.append(delta * (bid[0] - ask_price))
