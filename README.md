@@ -21,5 +21,8 @@ EXCHANGES = ["kucoin", "gateio", "mexc", "bitmart", "hitbtc", "bitfinex", "bitge
 ```shell
 # Activate venv if required
 # source .venv/bin/activate
+# Print price graph
 python main.py
+# Print possible orderbook profit
+python orderbook.py
 ```

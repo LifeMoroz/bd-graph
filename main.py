@@ -55,7 +55,7 @@ if __name__ == "__main__":
     SYMBOL = "QRDO-USDT"
     EXCHANGES = ["kucoin", "gateio", "mexc", "bitmart", "hitbtc", "bitfinex", "bitget"]
     # [start, end)
-    START = datetime.datetime(2024, 4, 2, 0, 0)
-    END = datetime.datetime(2024, 4, 2, 4, 0)
+    START = datetime.datetime(2024, 4, 8, 11, 0)
+    END = datetime.datetime.utcnow()
 
     run(SYMBOL, EXCHANGES, START, END)
